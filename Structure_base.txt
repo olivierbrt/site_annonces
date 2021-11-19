@@ -1,0 +1,51 @@
+Table users
+id_user : numeric
+username : alphanumeric (1-30)
+password : alphanumeric (1-30)
+nom : alphanumeric (1-30)
+prenom : alphanumeric (1-30)
+mail : ^[^@\s]+@[^@\s]+\.[^@\s]+$
+
+Users
+id_user PK int
+username varchar(100) UNIQUE
+password varchar(100)
+nom varchar(100)
+prenom varchar(100)
+mail varchar(255)
+
+
+Table annonces
+id_ann : numeric
+id_user
+date_pub : DATE
+titre : alphanumeric (1-30)
+description: alphanumeric (1-30)
+prix: numerique (1-5)
+photo : (chemin d'accès à la photo) alphanumeric (1-30)
+state : alphanumeric (1-30)
+
+Annonces as ann
+id_ann PK int
+id_user int FK >- Users.id_user
+date_pub date
+titre varchar(100)
+description varchar(500)
+prix money
+photo varchar(500)
+state varchar(100)
+
+table proposition
+id_user
+id_ann
+date_prop : DATE
+message : alphanumeric (1-100)
+proposition : numerique (1-5)
+
+Propositions as prop
+id_prop PK int
+id_user int FK >- Users.id_user
+id_ann int FK >- ann.id_ann
+date_prop date
+message varchar(500)
+proposition money
