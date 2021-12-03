@@ -7,7 +7,9 @@ exports.createUserSchema = [
         .exists()
         .withMessage('username is required')
         .isLength({ min: 3 })
-        .withMessage('Must be at least 3 chars long'),
+        .withMessage('Must be at least 3 chars long')
+        .isLength({ max: 20 })
+        .withMessage('Username can contain max 20 characters'),
     body('password')
         .exists()
         .withMessage('Password is required')
@@ -16,10 +18,6 @@ exports.createUserSchema = [
         .withMessage('Password must contain at least 6 characters')
         .isLength({ max: 10 })
         .withMessage('Password can contain max 10 characters'),
-    body('confirm_password')
-        .exists()
-        .custom((value, { req }) => value === req.body.password)
-        .withMessage('confirm_password field must have the same value as the password field'),
     body('prenom')
         .exists()
         .withMessage('Your first name is required')
@@ -52,13 +50,7 @@ exports.updateUserSchema = [
         .isLength({ min: 6 })
         .withMessage('Password must contain at least 6 characters')
         .isLength({ max: 10 })
-        .withMessage('Password can contain max 10 characters')
-        .custom((value, { req }) => !!req.body.confirm_password)
-        .withMessage('Please confirm your password'),
-    body('confirm_password')
-        .optional()
-        .custom((value, { req }) => value === req.body.password)
-        .withMessage('confirm_password field must have the same value as the password field'),
+        .withMessage('Password can contain max 10 characters'),
     body('prenom')
         .optional()
         .isAlpha()

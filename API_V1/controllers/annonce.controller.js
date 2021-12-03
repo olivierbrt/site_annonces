@@ -41,6 +41,12 @@ class AnnonceController {
         res.send(annonce);
     };
 
+    getMyAnnonces = async (req, res, next) => {
+        const annonce = await AnnonceModel.findByUserName(req.currentUser.username);
+
+        res.send(annonce);
+    };
+
     createAnnonce = async (req, res, next) => {
         this.checkValidation(req);
         const result = await AnnonceModel.create({...req.body, id_user : req.currentUser.id_user});

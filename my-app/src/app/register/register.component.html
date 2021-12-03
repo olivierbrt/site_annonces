@@ -1,0 +1,135 @@
+<section class="vh-100" style="background-color: #eee;">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-12 col-xl-11">
+                <div class="card text-black" style="border-radius: 25px;">
+                    <div class="card-body p-md-5">
+                        <div class="row justify-content-center">
+                            <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+
+                                <form class="mx-1 mx-md-4" *ngIf="!isSuccessful" name="form"
+                                    (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm"
+                                    [mustMatch]="['password', 'confirm_password']" novalidate>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input type="text" id="form3Example1c" class="form-control" name="prenom"
+                                                [(ngModel)]="form.prenom" required #prenom="ngModel" />
+                                            <label class="form-label" for="form3Example1c">Prenom</label>
+                                            <div class="alert alert-danger" *ngIf="prenom.errors && f.submitted">
+                                                <div *ngIf="prenom.errors.required">Prenom is required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input type="text" id="form3Example1c" class="form-control" name="nom"
+                                                [(ngModel)]="form.nom" required #nom="ngModel" />
+                                            <label class="form-label" for="form3Example1c">Nom</label>
+                                            <div class="alert alert-danger" *ngIf="nom.errors && f.submitted">
+                                                <div *ngIf="nom.errors.required">Nom is required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input type="text" id="form3Example1c" class="form-control" name="username"
+                                                [(ngModel)]="form.username" required #username="ngModel" minlength="3"
+                                                maxlength="20" />
+                                            <label class="form-label" for="form3Example1c">Username</label>
+                                            <div class="alert alert-danger" *ngIf="username.errors && f.submitted">
+                                                <div *ngIf="username.errors.required">Username is required</div>
+
+                                                <div *ngIf="username.errors.minlength">
+                                                    Username must be at least 3 characters
+                                                </div>
+                                                <div *ngIf="username.errors.maxlength">
+                                                    Username must be max 20 characters
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input type="email" id="form3Example3c" class="form-control"
+                                                class="form-control" name="mail" [(ngModel)]="form.mail" required mail
+                                                #mail="ngModel" />
+                                            <label class="form-label" for="form3Example3c">Email</label>
+                                            <div class="alert alert-danger" *ngIf="mail.errors && f.submitted">
+                                                <div *ngIf="mail.errors.required">Mail is required</div>
+                                                <div *ngIf="mail.errors.mail">
+                                                    Mail must be a valid mail address
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input type="password" id="password" class="form-control" name="password"
+                                                [(ngModel)]="form.password" required minlength="6"
+                                                #password="ngModel" />
+                                            <label class="form-label" for="form3Example4c">Password</label>
+                                            <div class="alert alert-danger" *ngIf="password.errors && f.submitted">
+                                                <div *ngIf="password.errors.required">Password is required</div>
+                                                <div *ngIf="password.errors.minlength">
+                                                    Password must be at least 6 characters
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input type="password" id="confirm_password" class="form-control"
+                                                name="confirm_password" [(ngModel)]="form.confirm_password" required
+                                                ngValidateEqual="password" #confirm_password="ngModel" />
+                                            <label class="form-label" for="confirm_password">Repeat your
+                                                password</label>
+                                            <div *ngIf="confirm_password.errors && f.submitted"
+                                                class="alert alert-danger">
+                                                <div *ngIf="confirm_password.errors.required">Password is required.
+                                                </div>
+                                                <div *ngIf="confirm_password.hasError('notEqual') && password.valid">
+                                                    Passwords Don't Match</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button class="btn btn-primary btn-block">Sign Up</button>
+                                    </div>
+
+                                    <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+                                        Signup failed!<br />{{ errorMessage }}
+                                    </div>
+                                </form>
+                                <div class="alert alert-success" *ngIf="isSuccessful">
+                                    Your registration is successful!
+                                </div>
+                            </div>
+                            <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                                <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-registration/draw1.png"
+                                    class="img-fluid" alt="Sample image">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -9,9 +9,9 @@ const awaitHandlerFactory = require('../middleware/awaitHandlerFactory.middlewar
 const { createPropositionSchema, acceptPropositionSchema } = require('../middleware/validators/propositionValidator.middleware');
 
 
-router.get('/', auth(), awaitHandlerFactory(propositionController.getPropositionsUser)); // localhost:3000/api/v1/propositions
-router.post('/', auth(), createPropositionSchema, AnnonceMiddleware.isAnnAvailable(), awaitHandlerFactory(propositionController.createProposition)); // localhost:3000/api/v1/propositions
-router.delete('/', auth(), isPropOwner(), awaitHandlerFactory(propositionController.deleteProposition)); // localhost:3000/api/v1/propositions
-router.get('/accept', auth(), acceptPropositionSchema, AnnonceMiddleware.isAnnAvailable(), AnnonceMiddleware.isAnnOwner(), awaitHandlerFactory(propositionController.acceptProposition)); // localhost:3000/api/v1/propositions/accept
+router.get('/', auth(), awaitHandlerFactory(propositionController.getPropositionsUser)); // localhost:3000/api/propositions
+router.post('/', auth(), createPropositionSchema, AnnonceMiddleware.isAnnAvailable(), awaitHandlerFactory(propositionController.createProposition)); // localhost:3000/api/propositions
+router.delete('/', auth(), isPropOwner(), awaitHandlerFactory(propositionController.deleteProposition)); // localhost:3000/api/propositions
+router.get('/accept', auth(), acceptPropositionSchema, AnnonceMiddleware.isAnnAvailable(), AnnonceMiddleware.isAnnOwner(), awaitHandlerFactory(propositionController.acceptProposition)); // localhost:3000/api/propositions/accept
 
 module.exports = router;

@@ -1,0 +1,58 @@
+<section class="vh-100">
+    <div class="container-fluid h-custom">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-9 col-lg-6 col-xl-5">
+                <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-login-form/draw2.png"
+                    class="img-fluid" alt="Sample image">
+            </div>
+            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                        <input type="email" id="form3Example3" class="form-control form-control-lg"
+                            placeholder="Enter a valid email address" name="mail" [(ngModel)]="form.mail" required #mail="ngModel"/>
+                        <label class="form-label" for="form3Example3">Email address</label>
+                        <div class="alert alert-danger" role="alert" *ngIf="mail.errors && f.submitted">
+                            Mail is required
+                        </div>
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="form-outline mb-3">
+                        <input type="password" id="form3Example4" class="form-control form-control-lg"
+                            placeholder="Enter password" name="password" [(ngModel)]="form.password" required
+                            minlength="6" #password="ngModel" />
+                        <label class="form-label" for="form3Example4">Password</label>
+                        <div class="alert alert-danger" role="alert" *ngIf="password.errors && f.submitted">
+                            <div *ngIf="password.errors.required">Password is required</div>
+                            <div *ngIf="password.errors.minlength">
+                                Password must be at least 6 characters
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <p class="small fw-bold mt-1 pt-1 mb-0">Don't have an account? <a href="register"
+                                class="link-danger">Register</a></p>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block mt-3" style="padding-left: 2.5rem; padding-right: 2.5rem;">
+                            Login
+                        </button>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">
+                            Login failed: {{ errorMessage }}
+                        </div>
+                    </div>
+
+                </form>
+                <div class="alert alert-success" *ngIf="isLoggedIn">
+                    Logged in as {{ role }}.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

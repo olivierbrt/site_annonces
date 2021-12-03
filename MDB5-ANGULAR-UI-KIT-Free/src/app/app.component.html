@@ -1,0 +1,98 @@
+<div id="app">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- Container wrapper -->
+    <div class="container">
+      <!-- Navbar brand -->
+      <a class="navbar-brand me-2" href="#">
+        <img src="assets/images/logo.png" height="40" alt="" loading="lazy" style="margin-top: -1px;" />
+      </a>
+
+      <!-- Toggle button -->
+      <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarButtonsExample"
+        aria-controls="navbarButtonsExample" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Collapsible wrapper -->
+      <div class="collapse navbar-collapse" id="navbarButtonsExample">
+        <!-- Left links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Categories</a>
+          </li>
+          <li class="nav-item">
+            <a mdbRipple class="btn btn-primary" style="background-color: #55acee;" href="#!" role="button"><i
+                class="fas fa-plus-circle me-2"></i>Ajouter une annonce</a>
+          </li>
+          <li class="nav-item">
+            <div class="input-group">
+              <input type="search w-100" class="form-control rounded" placeholder="Rechercher une annonce"
+                aria-label="Search" aria-describedby="search-addon" />
+              <button type="button" class="btn btn-primary">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </li>
+        </ul>
+
+        <!-- Left links -->
+
+        <div class="d-flex align-items-center">
+          <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+            <li class="nav-item">
+              <a class="nav-link" href="login">
+                <button type="button" class="btn btn-link px-3 me-2">
+                  Se connecter
+                </button>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="register">
+                <button type="button" class="btn btn-primary me-3">
+                  S'enregistrer
+                </button>
+              </a>
+            </li>
+          </ul>
+
+          <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+
+            <div mdbDropdown class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                aria-expanded="false" mdbDropdownToggle>
+                {{ username }}
+              </button>
+              <ul mdbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" href="/profile">Mon profil</a></li>
+                <li><a class="dropdown-item" href="/myannonces">Mes annonces</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#" (click)="logout()">Deconnexion</a></li>
+              </ul>
+            </div>
+          </ul>
+        </div>
+      </div>
+      <!-- Collapsible wrapper -->
+    </div>
+    <!-- Container wrapper -->
+  </nav>
+  <!-- Navbar -->
+
+  <div class="container mt-4 mb-4">
+    <router-outlet></router-outlet>
+  </div>
+
+  <footer class="bg-light text-center text-lg-start">
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2021 Copyright:
+      <a class="text-dark">Olivier BERTHIAU & Thomas BARRIER</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+
+</div>

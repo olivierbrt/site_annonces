@@ -6,6 +6,7 @@ const errorMiddleware = require('./middleware/error.middleware');
 const userRouter = require('./routes/user.route');
 const annonceRouter = require('./routes/annonce.route');
 const propositionRouter = require('./routes/proposition.route');
+const authRouter = require('./routes/auth.route');
 
 // Init express
 const app = express();
@@ -19,11 +20,12 @@ app.use(cors());
 // Enable pre-flight
 app.options("*", cors());
 
-const port = Number(process.env.PORT || 3331);
+const port = Number(process.env.PORT || 8080);
 
-app.use(`/api/v1/users`, userRouter);
-app.use(`/api/v1/annonces`, annonceRouter);
-app.use(`/api/v1/propositions`, propositionRouter);
+app.use(`/api/auth`, authRouter);
+app.use(`/api/users`, userRouter);
+app.use(`/api/annonces`, annonceRouter);
+app.use(`/api/propositions`, propositionRouter);
 
 // 404 error
 app.all('*', (req, res, next) => {

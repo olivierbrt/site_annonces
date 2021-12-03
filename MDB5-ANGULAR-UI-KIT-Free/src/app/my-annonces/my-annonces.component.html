@@ -1,0 +1,82 @@
+<div *ngIf="currentUser; else loggedOut">
+    <h1>Mes annonces</h1>
+    <!--<li *ngFor="let annnonce of annonces | keyvalue">
+        {{annnonce.value | json}}
+    </li>!-->
+
+    <div *ngFor="let annonce of annonces | keyvalue">
+        <section>
+            <div class="container py-2">
+                <div class="row justify-content-center mb-3">
+                    <div class="col-md-12 col-xl-10">
+                        <div class="card shadow-0 border rounded-3">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
+                                        <div class="bg-image hover-zoom ripple rounded ripple-surface">
+                                            <img src="{{ annonce.value.photo }}" class="w-100" />
+                                            <a href="#!">
+                                                <div class="hover-overlay">
+                                                    <div class="mask"
+                                                        style="background-color: rgba(253, 253, 253, 0.15);">
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-xl-6">
+                                        <h5>{{ annonce.value.titre }}</h5>
+                                        <div class="mt-1 mb-2 text-muted small">
+                                            <span>{{ annonce.value.date_pub | date:"dd/MM/yyyy hh:mm"}}</span>
+                                        </div>
+                                        <p class="text-truncate mb-4 mb-md-0">
+                                            {{ annonce.value.description }}
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
+                                        <div class="d-flex flex-row align-items-center mb-1">
+                                            <h4 class="mb-1 me-1">{{ annonce.value.prix }} €</h4>
+                                        </div>
+                                        <div class="d-flex flex-column mt-4">
+                                            <button class="btn btn-primary btn-sm" type="button">Modifier</button>
+                                            <button class="btn btn-danger btn-sm mt-2" type="button"
+                                                (click)="clickMethod(annonce.value.id_ann)">
+                                                Supprimer
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #loggedOut>
+    Please login.
+</ng-template>

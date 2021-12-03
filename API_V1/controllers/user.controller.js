@@ -53,17 +53,14 @@ class UserController {
     };
 
     createUser = async (req, res, next) => {
-        this.checkValidation(req);
-
         await this.hashPassword(req);
-
         const result = await UserModel.create(req.body);
 
         if (!result) {
             throw new HttpException(500, 'Something went wrong');
         }
 
-        res.status(201).send('User was created!');
+        res.status(201).send({'message': 'User was created!'});
     };
 
     updateCurrentUser = async (req, res, next) => {
