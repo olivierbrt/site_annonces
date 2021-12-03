@@ -1,1 +1,23 @@
-<p>annonce-modal works!</p>
+<div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Modifier</h5>
+      <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
+    </div>
+    <div *ngFor="let data of annonce | keyvalue">
+        <div class="modal-body">
+            <span>{{ data.key }}</span>
+            <div class="form-outline">
+                <mdb-form-control>
+                    <input mdbInput type="text" id="form1" class="form-control" value="{{ data.value }}" />
+                  </mdb-form-control>
+              </div>
+        </div>
+    </div>
+    <div class="modal-body">{{ annonce | json }}</div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="close()">
+        Close
+      </button>
+      <button type="button" class="btn btn-primary">Save changes</button>
+    </div>
+  </div>
