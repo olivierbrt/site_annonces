@@ -29,7 +29,7 @@ class AnnonceModel {
         return result[0];
     }
 
-    findByUserName = async(username) => {
+    findByUserName = async (username) => {
         let sql = `SELECT annonces.* FROM ${this.tableName} 
         INNER JOIN users ON annonces.id_user=users.id_user 
         WHERE users.username='${username}' AND annonces.state='1'`;
@@ -37,11 +37,20 @@ class AnnonceModel {
         return await query(sql, [username]);
     }
 
-    create = async ({date_pub, titre, description, prix, photo = null, id_user}) => {
-        const sql = `INSERT INTO ${this.tableName}
+    create = async ({ date_pub, titre, description, prix, photo = null, id_user }) => {
+        let affectedRows;
+        if (photo != null) {
+            const sql = `INSERT INTO ${this.tableName}
         (id_user, date_pub, titre, description, prix, photo) VALUES (?,?,?,?,?,?)`;
-        const result = await query(sql, [id_user, date_pub, titre, description, prix, photo]);
-        const affectedRows = result ? result.affectedRows : 0;
+            const result = await query(sql, [id_user, date_pub, titre, description, prix, photo]);
+            affectedRows = result ? result.affectedRows : 0;
+        }
+        else{
+            const sql = `INSERT INTO ${this.tableName}
+        (id_user, date_pub, titre, description, prix) VALUES (?,?,?,?,?)`;
+            const result = await query(sql, [id_user, date_pub, titre, description, prix]);
+            affectedRows = result ? result.affectedRows : 0;
+        }
 
         return affectedRows;
     }

@@ -12,7 +12,7 @@ router.get('/', awaitHandlerFactory(annonceController.getAllAnnonces)); // local
 router.get('/myannonces', auth(), awaitHandlerFactory(annonceController.getMyAnnonces)); // localhost:3000/api/annonces/myannonces
 router.post('/', auth(), createAnnonceSchema, awaitHandlerFactory(annonceController.createAnnonce)); // localhost:3000/api/annonces
 router.delete('/', auth(), AnnonceMiddleware.isAnnOwner(), AnnonceMiddleware.isAnnAvailable(), awaitHandlerFactory(annonceController.deleteAnnonce)); // localhost:3000/api/annonces
-router.put('/:id', auth(), updateAnnonceSchema, AnnonceMiddleware.isAnnOwner(), AnnonceMiddleware.isAnnAvailable(), awaitHandlerFactory(annonceController.updateAnnonce)); // localhost:3000/api/annonces/:id
+router.put('/', auth(), updateAnnonceSchema, AnnonceMiddleware.isAnnOwner(), AnnonceMiddleware.isAnnAvailable(), awaitHandlerFactory(annonceController.updateAnnonce)); // localhost:3000/api/annonces/:id
 router.get('/id/:id', awaitHandlerFactory(annonceController.getAnnonceById)); // localhost:3000/api/annonces/id/1
 router.get('/title/:title', awaitHandlerFactory(annonceController.getAnnonceByTitle)); // localhost:3000/api/annonces/:title
 router.get('/user/:username', awaitHandlerFactory(annonceController.getUserAnnonces)); // localhost:3000/api/annonces/user/:username

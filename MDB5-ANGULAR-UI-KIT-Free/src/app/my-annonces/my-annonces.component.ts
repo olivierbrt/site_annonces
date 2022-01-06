@@ -36,13 +36,15 @@ export class MyAnnoncesComponent implements OnInit {
   }
 
   openModal(infoAnnonce : any) {
-    delete infoAnnonce.id_ann;
-    delete infoAnnonce.id_user;
-    delete infoAnnonce.state;
-    delete infoAnnonce.date_pub;
-    this.modalRef = this.modalService.open(AnnonceModalComponent, { data : { annonce : infoAnnonce }});
-    this.modalRef.onClose.subscribe((message: any) => {
-      console.log(message);
+    let copy =JSON.parse(JSON.stringify(infoAnnonce))
+    delete copy.id_user;
+    delete copy.state;
+    delete copy.date_pub;
+    this.modalRef = this.modalService.open(AnnonceModalComponent, { data : { annonce : copy }});
+    this.modalRef.onClose.subscribe((isSuccessful: boolean) => {
+      if(isSuccessful){
+        window.location.reload();
+      }
     });
   }
 
@@ -50,8 +52,11 @@ export class MyAnnoncesComponent implements OnInit {
     if(confirm("Are you sure to delete "+id_ann)) {
       this.annonceService.deleteAnnonce(id_ann).subscribe(
         data => {
+          console.log(data);
+          window.location.reload();
         },
         err => {
+          console.log(err);
         }
       );
       console.log("Implement delete functionality here");

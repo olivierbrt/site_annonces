@@ -33,6 +33,8 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { ListAnnoncesComponent } from './list-annonces/list-annonces.component';
 import { MyAnnoncesComponent } from './my-annonces/my-annonces.component';
 import { AnnonceModalComponent } from './annonce-modal/annonce-modal.component';
+import { ProfileModalComponent } from './profile-modal/profile-modal.component';
+import { CreateAnnonceComponent } from './create-annonce/create-annonce.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { AnnonceModalComponent } from './annonce-modal/annonce-modal.component';
     ProfileComponent,
     ListAnnoncesComponent,
     MyAnnoncesComponent,
-    AnnonceModalComponent
+    AnnonceModalComponent,
+    ProfileModalComponent,
+    CreateAnnonceComponent
   ],
   imports: [
     BrowserModule,

@@ -37,16 +37,5 @@ exports.updateAnnonceSchema = [
     body('prix')
         .optional()
         .isNumeric()
-        .withMessage('prix must be numeric'),
-    body()
-        .custom(value => {
-            return !!Object.keys(value).length;
-        })
-        .withMessage('Please provide required field to update')
-        .custom(value => {
-            const updates = Object.keys(value);
-            const allowUpdates = ['titre', 'description', 'prix'];
-            return updates.every(update => allowUpdates.includes(update));
-        })
-        .withMessage('Invalid updates!')
+        .withMessage('prix must be numeric')
 ];

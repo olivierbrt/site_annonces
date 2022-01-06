@@ -30,26 +30,33 @@ export class AnnonceService {
     return this.http.get(AUTH_API + '/user/'+username, httpOptions);
   }
 
-  createAnnonce(date_pub: string, titre: string, description: string, prix: number): Observable<any> {
+  createAnnonce(date_pub: string, titre: string, description: string, prix: number, photo: string): Observable<any> {
     return this.http.post(AUTH_API , {
       date_pub,
       titre,
       description,
-      prix
+      prix,
+      photo
     }, httpOptions);
   }
 
-  updateAnnonce(id:number, titre: string, description: string, prix: number): Observable<any> {
-    return this.http.post(AUTH_API + '/'+id , {
+  updateAnnonce(id_ann:number, titre: string, description: string, prix: string, photo: string): Observable<any> {
+    return this.http.put(AUTH_API , {
+      id_ann,
       titre,
       description,
-      prix
+      prix,
+      photo
     }, httpOptions);
   }
 
   deleteAnnonce(id:string): Observable<any> {
-    return this.http.post(AUTH_API , {
-      id
-    }, httpOptions);
+    const options = {
+      httpOptions,
+      body:{
+        id_ann: id
+      }
+    }
+    return this.http.delete(AUTH_API , options);
   }
 }

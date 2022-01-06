@@ -1,0 +1,55 @@
+<div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Modifier</h5>
+      <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
+    </div>
+    <form name="form" *ngIf="!isSuccessful" (ngSubmit)="onSubmit(f)" #f="ngForm" novalidate>
+      <div class="modal-body">
+        <span>Email</span>
+        <div class="input-group">
+          <input type="text" name="mail" [(ngModel)]="user.mail" required #mail="ngModel" class="form-control"
+            aria-label="Entrez un mail" />
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <span>Nom d'utilisateur</span>
+        <div class="input-group">
+          <input type="text" name="username" [(ngModel)]="user.username" required #username="ngModel" class="form-control"
+            aria-label="Entrez un nom d'utilisateur" />
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <span>Nom</span>
+        <div class="input-group">
+            <input type="text" name="nom" [(ngModel)]="user.nom" required #nom="ngModel" class="form-control"
+            aria-label="Entrez un nom" />
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <span>Prénom</span>
+        <div class="input-group">
+            <input type="text" name="prenom" [(ngModel)]="user.prenom" required #nom="ngModel" class="form-control"
+            aria-label="Entrez un prénom" />
+        </div>
+      </div>
+  
+      <div class="alert-warning" *ngIf="f.submitted && !isSuccessful">
+        Erreur de modification :<br />{{ errorMessage }}
+      </div>
+  
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="close()">Annuler</button>
+        <button class="btn btn-primary">Sauvegarder</button>
+      </div>
+    </form>
+
+    <div *ngIf="isSuccessful">
+      <div class="alert-success">{{ message }}</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="close()">Fermer</button>
+      </div>
+    </div>
+  </div>

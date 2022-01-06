@@ -28,7 +28,7 @@
                                     <div class="col-md-6 col-lg-6 col-xl-6">
                                         <h5>{{ annonce.value.titre }}</h5>
                                         <div class="mt-1 mb-2 text-muted small">
-                                            <span>{{ annonce.value.date_pub | date:"dd/MM/yyyy hh:mm"}}</span>
+                                            <span>{{ annonce.value.date_pub | date:"dd/MM/yyyy"}}</span>
                                         </div>
                                         <p class="text-truncate mb-4 mb-md-0">
                                             {{ annonce.value.description }}
@@ -39,9 +39,8 @@
                                             <h4 class="mb-1 me-1">{{ annonce.value.prix }} €</h4>
                                         </div>
                                         <div class="d-flex flex-column mt-4">
-                                            <button class="btn btn-primary btn-sm" type="button">Modifier</button>
-                                            <button class="btn btn-danger btn-sm mt-2" type="button"
-                                                (click)="openModal(annonce.value)">
+                                            <button class="btn btn-primary btn-sm" type="button" (click)="openModal(annonce.value)">Modifier</button>
+                                            <button class="btn btn-danger btn-sm mt-2" type="button" (click)="clickMethod(annonce.value.id_ann)">
                                                 Supprimer
                                             </button>
                                         </div>

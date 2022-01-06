@@ -14,7 +14,7 @@ class AnnonceController {
             throw new HttpException(404, 'annonces not found');
         }
 
-        res.send(annonceList);
+        res.status(201).send(annonceList);
     };
 
     getAnnonceById = async (req, res, next) => {
@@ -23,7 +23,7 @@ class AnnonceController {
             throw new HttpException(404, 'annonce not found');
         }
 
-        res.send(annonce);
+        res.status(201).send(annonce);
     };
 
     getAnnonceByTitle = async (req, res, next) => {
@@ -32,19 +32,19 @@ class AnnonceController {
             throw new HttpException(404, 'annonce not found');
         }
 
-        res.send(annonce);
+        res.status(201).send(annonce);
     };
 
     getUserAnnonces = async (req, res, next) => {
         const annonce = await AnnonceModel.findByUserName(req.params.username);
 
-        res.send(annonce);
+        res.status(201).send(annonce);
     };
 
     getMyAnnonces = async (req, res, next) => {
         const annonce = await AnnonceModel.findByUserName(req.currentUser.username);
 
-        res.send(annonce);
+        res.status(201).send(annonce);
     };
 
     createAnnonce = async (req, res, next) => {
@@ -55,7 +55,7 @@ class AnnonceController {
             throw new HttpException(500, 'Something went wrong');
         }
 
-        res.status(201).send('annonce was created!');
+        res.status(201).send({message :'annonce was created!'});
     };
 
     updateAnnonce = async (req, res, next) => {
@@ -63,7 +63,7 @@ class AnnonceController {
         const { id_ann, id_user, state, date_pub, ...restOfUpdates } = req.body;
         // do the update query and get the result
         // it can be partial edit
-        const result = await AnnonceModel.update(restOfUpdates, req.params.id);
+        const result = await AnnonceModel.update(restOfUpdates, req.body.id_ann);
 
         if (!result) {
             throw new HttpException(404, 'Something went wrong');
@@ -74,15 +74,15 @@ class AnnonceController {
         const message = !affectedRows ? 'annonce not found' :
             affectedRows && changedRows ? 'annonce updated successfully' : 'Updated faild';
 
-        res.send({ message, info });
+        res.status(201).send({ message, info });
     };
 
     deleteAnnonce = async (req, res, next) => {
-        const result = await AnnonceModel.delete(req.body.id);
+        const result = await AnnonceModel.delete(req.body.id_ann);
         if (!result) {
             throw new HttpException(404, 'annonce not found');
         }
-        res.send('annonce has been deleted');
+        res.status(201).send({message : 'annonce has been deleted'});
     };
 
     checkValidation = (req) => {

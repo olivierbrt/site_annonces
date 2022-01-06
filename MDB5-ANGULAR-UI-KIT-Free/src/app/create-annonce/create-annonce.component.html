@@ -1,0 +1,91 @@
+<div *ngIf="currentUser; else loggedOut">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-12 col-xl-11">
+                <div class="card-body p-md-5">
+                    <div class="row justify-content-center">
+                        <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                            <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Créer une annonce</p>
+
+                            <form class="mx-1 mx-md-4" *ngIf="!isSuccessful" name="form"
+                                (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+
+                                <div class="d-flex flex-row align-items-center mt-4">
+                                    <i class="fas fa-pencil-alt fa-lg me-3 fa-fw"></i>
+                                    <mdb-form-control>
+                                        <input mdbInput type="text" id="form3Example1c" class="form-control"
+                                            name="titre" [(ngModel)]="form.titre" required #titre="ngModel" size="40" />
+                                        <label mdbLabel class="form-label" for="form3Example1c">Titre</label>
+                                    </mdb-form-control>
+                                </div>
+                                <div class="alert-danger" style="margin-left: 11%;" *ngIf="titre.errors && f.submitted">
+                                    <div *ngIf="titre.errors.required">Titre obligatoire</div>
+                                </div>
+
+                                <div class="d-flex flex-row align-items-center mt-4">
+                                    <i class="fas fa-align-justify fa-lg me-3 fa-fw"></i>
+                                    <mdb-form-control>
+                                        <input mdbInput type="text" id="form3Example1c" class="form-control"
+                                            name="description" [(ngModel)]="form.description" required
+                                            #description="ngModel" size="40" />
+                                        <label mdbLabel class="form-label" for="form3Example1c">Description</label>
+                                    </mdb-form-control>
+                                </div>
+                                <div class="alert-danger" style="margin-left: 11%;"
+                                    *ngIf="description.errors && f.submitted">
+                                    <div *ngIf="description.errors.required">Description obligatoire</div>
+                                </div>
+
+                                <div class="d-flex flex-row align-items-center mt-4">
+                                    <i class="fas fa-euro-sign fa-lg me-3 fa-fw"></i>
+                                    <mdb-form-control>
+                                        <input mdbInput type="text" id="form3Example1c" class="form-control"
+                                            name="prix" [(ngModel)]="form.prix" required
+                                            #prix="ngModel" size="40" />
+                                        <label mdbLabel class="form-label" for="form3Example1c">Prix</label>
+                                    </mdb-form-control>
+                                </div>
+                                <div class="alert-danger" style="margin-left: 11%;"
+                                    *ngIf="prix.errors && f.submitted">
+                                    <div *ngIf="prix.errors.required">Prix obligatoire</div>
+                                </div>
+
+                                <div class="d-flex flex-row align-items-center mt-4">
+                                    <i class="fas fa-camera fa-lg me-3 fa-fw"></i>
+                                    <mdb-form-control>
+                                        <input mdbInput type="text" id="form3Example1c" class="form-control"
+                                            name="photo" [(ngModel)]="form.photo"
+                                            #photo="ngModel" size="40" />
+                                        <label mdbLabel class="form-label" for="form3Example1c">Photo</label>
+                                    </mdb-form-control>
+                                </div>
+
+                                <div class="form-group mt-4">
+                                    <button class="btn btn-primary btn-block">Créer l'annonce</button>
+                                </div>
+
+                                <div class="alert-warning" *ngIf="f.submitted && isCreateFailed">
+                                    Erreur de création :<br />{{ errorMessage }}
+                                </div>
+                            </form>
+                            <div class="alert-success" *ngIf="isSuccessful">
+                                Création de l'annonce réussie !
+                            </div>
+                        </div>
+                        <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                            <img src="assets/images/creer_annonce.png"
+                                class="img-fluid" alt="Sample image">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #loggedOut>
+    Veuillez-vous connecter pour pouvoir créer une annonce.
+</ng-template>
