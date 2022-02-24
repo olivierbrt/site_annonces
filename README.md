@@ -1,8 +1,6 @@
 # site_annonces
 Projet site d'annonces
 
-README
-
 CONTACT
 
 Pour toutes demandes concernant le site web Polytech occasion veuillez contacter :
